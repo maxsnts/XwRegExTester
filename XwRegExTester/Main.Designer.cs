@@ -47,6 +47,7 @@
             this.treeResult = new XwRegExTester.MyTreeView();
             this.ToolbarUpdates = new System.Windows.Forms.ToolStripButton();
             this.ToolbarSite = new System.Windows.Forms.ToolStripButton();
+            this.numberOfResults = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -66,6 +67,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.numberOfResults);
             this.splitContainer1.Panel1.Controls.Add(this.checkMultiline);
             this.splitContainer1.Panel1.Controls.Add(this.checkSpaces);
             this.splitContainer1.Panel1.Controls.Add(this.checkExtended);
@@ -79,7 +81,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(958, 731);
-            this.splitContainer1.SplitterDistance = 259;
+            this.splitContainer1.SplitterDistance = 232;
             this.splitContainer1.TabIndex = 0;
             // 
             // checkMultiline
@@ -165,7 +167,7 @@
             this.textRegEx.HideSelection = false;
             this.textRegEx.Location = new System.Drawing.Point(12, 12);
             this.textRegEx.Name = "textRegEx";
-            this.textRegEx.Size = new System.Drawing.Size(799, 244);
+            this.textRegEx.Size = new System.Drawing.Size(799, 217);
             this.textRegEx.TabIndex = 0;
             this.textRegEx.Text = "";
             this.textRegEx.WordWrap = false;
@@ -200,7 +202,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeResult);
-            this.splitContainer2.Size = new System.Drawing.Size(958, 468);
+            this.splitContainer2.Size = new System.Drawing.Size(958, 495);
             this.splitContainer2.SplitterDistance = 577;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -209,7 +211,7 @@
             this.comboEncoding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.comboEncoding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEncoding.FormattingEnabled = true;
-            this.comboEncoding.Location = new System.Drawing.Point(336, 436);
+            this.comboEncoding.Location = new System.Drawing.Point(336, 463);
             this.comboEncoding.Name = "comboEncoding";
             this.comboEncoding.Size = new System.Drawing.Size(157, 21);
             this.comboEncoding.TabIndex = 5;
@@ -217,7 +219,7 @@
             // butClean
             // 
             this.butClean.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.butClean.Location = new System.Drawing.Point(12, 405);
+            this.butClean.Location = new System.Drawing.Point(12, 432);
             this.butClean.Name = "butClean";
             this.butClean.Size = new System.Drawing.Size(185, 23);
             this.butClean.TabIndex = 4;
@@ -237,7 +239,7 @@
             this.textSource.HideSelection = false;
             this.textSource.Location = new System.Drawing.Point(12, 0);
             this.textSource.Name = "textSource";
-            this.textSource.Size = new System.Drawing.Size(562, 400);
+            this.textSource.Size = new System.Drawing.Size(562, 427);
             this.textSource.TabIndex = 3;
             this.textSource.Text = "";
             this.textSource.WordWrap = false;
@@ -247,7 +249,7 @@
             // butLoadUrl
             // 
             this.butLoadUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butLoadUrl.Location = new System.Drawing.Point(499, 435);
+            this.butLoadUrl.Location = new System.Drawing.Point(499, 462);
             this.butLoadUrl.Name = "butLoadUrl";
             this.butLoadUrl.Size = new System.Drawing.Size(75, 23);
             this.butLoadUrl.TabIndex = 2;
@@ -259,7 +261,7 @@
             // 
             this.textURL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textURL.Location = new System.Drawing.Point(12, 436);
+            this.textURL.Location = new System.Drawing.Point(12, 463);
             this.textURL.Name = "textURL";
             this.textURL.Size = new System.Drawing.Size(318, 20);
             this.textURL.TabIndex = 1;
@@ -273,7 +275,7 @@
             this.treeResult.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeResult.Location = new System.Drawing.Point(0, 0);
             this.treeResult.Name = "treeResult";
-            this.treeResult.Size = new System.Drawing.Size(365, 456);
+            this.treeResult.Size = new System.Drawing.Size(365, 483);
             this.treeResult.TabIndex = 0;
             this.treeResult.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeResult_AfterSelect);
             this.treeResult.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textRegEx_KeyDown);
@@ -289,6 +291,16 @@
             this.ToolbarSite.Name = "ToolbarSite";
             this.ToolbarSite.Size = new System.Drawing.Size(23, 23);
             // 
+            // numberOfResults
+            // 
+            this.numberOfResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.numberOfResults.AutoSize = true;
+            this.numberOfResults.Location = new System.Drawing.Point(851, 215);
+            this.numberOfResults.Name = "numberOfResults";
+            this.numberOfResults.Size = new System.Drawing.Size(50, 13);
+            this.numberOfResults.TabIndex = 6;
+            this.numberOfResults.Text = "? matchs";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,7 +311,6 @@
             this.Name = "Main";
             this.Text = "XwRegExTester";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textRegEx_KeyDown);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -336,7 +347,7 @@
         private System.Windows.Forms.CheckBox checkExtended;
         private System.Windows.Forms.CheckBox checkIgnoreCasa;
         private System.Windows.Forms.CheckBox checkGlobal;
-
-	}
+        private System.Windows.Forms.Label numberOfResults;
+    }
 }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using XwRegExTester.Properties;
@@ -14,37 +15,15 @@ namespace XwRegExTester
 		public Main()
 		{
 			InitializeComponent();
-            //this.Text = String.Format(@"XwRegExTester {0}", XwCode.Helper.Misc.GetAssemblyVersion(typeof(Main)));
 		}
 
-		//********************************************************************************************************
-		private void butLoadUrl_Click(object sender, EventArgs e)
-		{
-			textSource.Text = "";
-			//textSource.Text = XwCode.Helper.Net.HttpGet(textURL.Text, string.Empty, System.Text.Encoding.GetEncoding(comboEncoding.SelectedItem.ToString()));
-		}
 
-		//*************************************************************************************************
-		private void textURL_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode == Keys.Enter)
-			{
-				butLoadUrl_Click(sender, e);
-			}
-		}
-
-		//*************************************************************************************************
-		private void textRegEx_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode == Keys.F5)
-			{
-				btnExecute_Click(sender, e);
-			}
-		}
 
 		//*************************************************************************************************
 		private void Main_Load(object sender, EventArgs e)
 		{
+            Text += PrintVersion(typeof(Main));
+
             ToolbarUpdates.Image = null;
 
             comboEncoding.Items.Add(System.Text.Encoding.Default.WebName);
@@ -79,34 +58,72 @@ namespace XwRegExTester
 			catch { }
 		}
 
-		//*************************************************************************************************
-		private void Main_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			try
-			{
-				File.WriteAllText("LastRegEx.dat", textRegEx.Text);
-				File.WriteAllText("LastURL.dat", textURL.Text);
-				File.WriteAllText("LastSource.dat", textSource.Text);
-				File.WriteAllText("LastEcoding.dat", comboEncoding.SelectedItem.ToString());
-			}
-			catch { }
-		}
+        //*************************************************************************************************
+        private void textRegEx_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                btnExecute_Click(sender, e);
+            }
+        }
 
-		//********************************************************************************************************
-		private void btnExecute_Click(object sender, EventArgs e)
-		{
-			Cursor.Current = Cursors.WaitCursor;
+        //********************************************************************************************************
+        private void butLoadUrl_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            textSource.Text = "";
+            using (WebClient client = new WebClient())
+            {
+                client.Encoding = System.Text.Encoding.GetEncoding(comboEncoding.SelectedItem.ToString());
+                textSource.Text = client.DownloadString(textURL.Text);
+            }
+            Cursor.Current = Cursors.Default;
+        }
 
-			try
-			{
-				treeResult.BeginUpdate();
-				treeResult.Nodes.Clear();
+        //*************************************************************************************************
+        private void textURL_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                butLoadUrl_Click(sender, e);
+            }
+        }
+
+        //***********************************************************************************************************
+        private string PrintVersion(Type type)
+        {
+            return " v" + System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetAssembly(type).Location).FileVersion.ToString();
+        }
+
+
+        //********************************************************************************************************
+        private void btnExecute_Click(object sender, EventArgs e)
+		{
+            try
+            {
+                File.WriteAllText("LastRegEx.dat", textRegEx.Text);
+                File.WriteAllText("LastURL.dat", textURL.Text);
+                File.WriteAllText("LastSource.dat", textSource.Text);
+                File.WriteAllText("LastEcoding.dat", comboEncoding.SelectedItem.ToString());
+            }
+            catch { }
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            numberOfResults.Text = "";
+            textSource.SuspendLayout();
+            treeResult.SuspendLayout();
+            treeResult.BeginUpdate();
+            
+            try
+            {
+                treeResult.Nodes.Clear();
 
                 textSource.SelectAll();
 				textSource.SelectionColor = Color.Black;
 				textSource.SelectionBackColor = Color.White;
 				textSource.DeselectAll();
-
+                
                 if (textRegEx.Text.Trim() == string.Empty)
                     return;
                 
@@ -114,7 +131,7 @@ namespace XwRegExTester
 
 				Regex rgx = new Regex(ext.Trim());
 				MatchCollection mc = rgx.Matches(textSource.Text);
-				
+                numberOfResults.Text = $"{mc.Count} matches";
                 foreach (Match m in mc)
 				{
 					TreeNode match = new TreeNode(PrintValue(m.Value));
@@ -145,7 +162,7 @@ namespace XwRegExTester
 						textSource.SelectionColor = gColor;
 					}
 				}
-			}
+            }
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message);
@@ -154,10 +171,13 @@ namespace XwRegExTester
 			{
                 textSource.DeselectAll();
                 treeResult.ExpandAll();
-                treeResult.EndUpdate();
                 Cursor.Current = Cursors.Default;
 			}
-		}
+
+            textSource.ResumeLayout();
+            treeResult.ResumeLayout();
+            treeResult.EndUpdate();
+        }
 
 		//********************************************************************************************************
 		private string PrintValue(string value)
