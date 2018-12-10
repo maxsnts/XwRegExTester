@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -129,21 +130,29 @@ namespace XwRegExTester
                 
 				string ext = (textRegEx.SelectedText.Length == 0) ? textRegEx.Text : textRegEx.SelectedText;
 
-				Regex rgx = new Regex(ext.Trim());
-				MatchCollection mc = rgx.Matches(textSource.Text);
-                numberOfResults.Text = $"{mc.Count} matches";
-                foreach (Match m in mc)
+				Regex rgx = new Regex(ext.Trim(), RegexOptions.CultureInvariant);
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+                MatchCollection mc = rgx.Matches(textSource.Text);
+                //try force load to calculate time
+                //-----------------------
+                int cntM = mc.Count;
+                foreach (Match m in mc) { int a = m.Captures.Count; int b = m.Groups.Count; }
+                //-----------------------
+                watch.Stop();
+                numberOfResults.Text = $"{cntM} matches\n{watch.Elapsed.ToString(@"hh\:mm\:ss\.fffffff")}";
+                for (int i=0; i<cntM; i++)
 				{
-					TreeNode match = new TreeNode(PrintValue(m.Value));
-					match.Tag = m;
+                    TreeNode match = new TreeNode(PrintValue(mc[i].Value));
+					match.Tag = mc[i];
 					treeResult.Nodes.Add(match);
 
-					textSource.Select(m.Index, m.Length);
+					textSource.Select(mc[i].Index, mc[i].Length);
 					textSource.SelectionBackColor = Color.FromArgb(220, 220, 220);
 
 					GroupColor = 0;
 					int cnt = 0;
-					foreach (Group g in m.Groups)
+					foreach (Group g in mc[i].Groups)
 					{
 						string groupName = rgx.GroupNameFromNumber(cnt++);
 
@@ -162,6 +171,7 @@ namespace XwRegExTester
 						textSource.SelectionColor = gColor;
 					}
 				}
+                
             }
 			catch (Exception ex)
 			{

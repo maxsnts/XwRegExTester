@@ -30,6 +30,7 @@
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.numberOfResults = new System.Windows.Forms.Label();
             this.checkMultiline = new System.Windows.Forms.CheckBox();
             this.checkSpaces = new System.Windows.Forms.CheckBox();
             this.checkExtended = new System.Windows.Forms.CheckBox();
@@ -47,7 +48,6 @@
             this.treeResult = new XwRegExTester.MyTreeView();
             this.ToolbarUpdates = new System.Windows.Forms.ToolStripButton();
             this.ToolbarSite = new System.Windows.Forms.ToolStripButton();
-            this.numberOfResults = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -84,11 +84,21 @@
             this.splitContainer1.SplitterDistance = 232;
             this.splitContainer1.TabIndex = 0;
             // 
+            // numberOfResults
+            // 
+            this.numberOfResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.numberOfResults.Location = new System.Drawing.Point(817, 195);
+            this.numberOfResults.Name = "numberOfResults";
+            this.numberOfResults.Size = new System.Drawing.Size(129, 34);
+            this.numberOfResults.TabIndex = 6;
+            this.numberOfResults.Text = "? matchs";
+            this.numberOfResults.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // checkMultiline
             // 
             this.checkMultiline.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkMultiline.AutoSize = true;
-            this.checkMultiline.Location = new System.Drawing.Point(817, 189);
+            this.checkMultiline.Location = new System.Drawing.Point(817, 167);
             this.checkMultiline.Name = "checkMultiline";
             this.checkMultiline.Size = new System.Drawing.Size(81, 17);
             this.checkMultiline.TabIndex = 5;
@@ -100,7 +110,7 @@
             // 
             this.checkSpaces.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkSpaces.AutoSize = true;
-            this.checkSpaces.Location = new System.Drawing.Point(817, 166);
+            this.checkSpaces.Location = new System.Drawing.Point(817, 148);
             this.checkSpaces.Name = "checkSpaces";
             this.checkSpaces.Size = new System.Drawing.Size(68, 17);
             this.checkSpaces.TabIndex = 5;
@@ -112,7 +122,7 @@
             // 
             this.checkExtended.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkExtended.AutoSize = true;
-            this.checkExtended.Location = new System.Drawing.Point(817, 143);
+            this.checkExtended.Location = new System.Drawing.Point(817, 129);
             this.checkExtended.Name = "checkExtended";
             this.checkExtended.Size = new System.Drawing.Size(85, 17);
             this.checkExtended.TabIndex = 5;
@@ -124,7 +134,7 @@
             // 
             this.checkIgnoreCasa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkIgnoreCasa.AutoSize = true;
-            this.checkIgnoreCasa.Location = new System.Drawing.Point(817, 120);
+            this.checkIgnoreCasa.Location = new System.Drawing.Point(817, 110);
             this.checkIgnoreCasa.Name = "checkIgnoreCasa";
             this.checkIgnoreCasa.Size = new System.Drawing.Size(94, 17);
             this.checkIgnoreCasa.TabIndex = 5;
@@ -136,7 +146,7 @@
             // 
             this.checkGlobal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkGlobal.AutoSize = true;
-            this.checkGlobal.Location = new System.Drawing.Point(817, 97);
+            this.checkGlobal.Location = new System.Drawing.Point(817, 92);
             this.checkGlobal.Name = "checkGlobal";
             this.checkGlobal.Size = new System.Drawing.Size(71, 17);
             this.checkGlobal.TabIndex = 5;
@@ -290,16 +300,6 @@
             // 
             this.ToolbarSite.Name = "ToolbarSite";
             this.ToolbarSite.Size = new System.Drawing.Size(23, 23);
-            // 
-            // numberOfResults
-            // 
-            this.numberOfResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.numberOfResults.AutoSize = true;
-            this.numberOfResults.Location = new System.Drawing.Point(851, 215);
-            this.numberOfResults.Name = "numberOfResults";
-            this.numberOfResults.Size = new System.Drawing.Size(50, 13);
-            this.numberOfResults.TabIndex = 6;
-            this.numberOfResults.Text = "? matchs";
             // 
             // Main
             // 
